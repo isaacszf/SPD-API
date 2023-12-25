@@ -1,0 +1,27 @@
+services:
+  database:
+    image: 'postgres:16.1'
+    container_name: 'spd_db_container'
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=spd_database
+      - POSTGRES_USER=spd_user
+      - POSTGRES_PASSWORD=40028922
+    volumes:
+      - /custom/mount:/var/lib/postgresql/data
+    restart: always
+
+  flyway:
+    image: 'flyway/flyway:10.2.0'
+    container_name: 'spd_flyway_container'
+    environment:
+      - FLYWAY_EDITION=community
+      - FLYWAY_USER=spd_user
+      - FLYWAY_PASSWORD=40028922
+      - FLYWAY_URL=jdbc:postgresql://database:5432/spd_database
+    volumes:
+      - $PWD/sql_versions:/flyway/sql
+    command: -connectRetries=10 migrate
+    depends_on:
+      - database

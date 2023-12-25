@@ -1,0 +1,11 @@
+package com.isaacszf.spd.domain.enums;
+
+public enum MethodContagion {
+    CONTATO_DIRETO,
+    CONTATO_INDIRETO,
+    TRANSMISSAO_DE_GOTAS,
+    TRANSMISSAO_FECAL_ORAL,
+    TRANSMISSAO_POR_VETORES,
+    TRANSMISSÃO_VERTICAL,
+    TRANSMISSAO_POR_ALIMENTOS_INFECTADOS
+}
